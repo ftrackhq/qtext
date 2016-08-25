@@ -1,5 +1,11 @@
-import pytest
 import os
+import sys
+import pytest
+
+
+@pytest.fixture
+def python_version():
+    return sys.version_info
 
 
 @pytest.fixture

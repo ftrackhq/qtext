@@ -1,5 +1,7 @@
 import os
 import sys
+import warnings
+
 
 # provide default resolution order for Qt
 os.environ['QT_PREFERRED_BINDING'] = 'PyQt4:PySide:PyQt5:PySide2'
