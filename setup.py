@@ -1,5 +1,5 @@
 import os
-from setuptools import find_packages
+from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 
@@ -22,8 +22,8 @@ class PyTest(TestCommand):
 
 
 # General configuration.
-configuration = dict(
-    name='QtExt',
+setup(
+    name='QtExtender',
     version='0.1.0',
     description='Qt framework extender',
     keywords='PyQt4, PyQt5, PySide, PySide2',
@@ -36,6 +36,8 @@ configuration = dict(
     },
     setup_requires=[
         'Qt.py >= 0.3.1',
+        'sphinx >= 1.2.2, < 2',
+        'sphinx_rtd_theme >= 0.1.6, < 2'
     ],
     install_requires=[
         'Qt.py >= 0.3.1',
