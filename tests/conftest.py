@@ -9,7 +9,7 @@ def python_version():
 
 
 @pytest.fixture
-def pyside():
+def PySide():
     os.environ["QT_PREFERRED_BINDING"] = "PySide"
 
     def finalizer():
@@ -17,7 +17,7 @@ def pyside():
 
 
 @pytest.fixture
-def pyside2():
+def PySide2():
     os.environ["QT_PREFERRED_BINDING"] = "PySide2"
 
     def finalizer():
@@ -25,7 +25,7 @@ def pyside2():
 
 
 @pytest.fixture
-def pyqt4():
+def PyQt4():
     os.environ["QT_PREFERRED_BINDING"] = "PyQt4"
 
     def finalizer():
@@ -33,7 +33,7 @@ def pyqt4():
 
 
 @pytest.fixture
-def pyqt5():
+def PyQt5():
     os.environ["QT_PREFERRED_BINDING"] = "PyQt5"
 
     def finalizer():
