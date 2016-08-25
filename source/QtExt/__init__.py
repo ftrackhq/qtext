@@ -1,21 +1,27 @@
+import os
+import sys
+
+# provide default resolution order for Qt
+os.environ['QT_PREFERRED_BINDING'] = 'PyQt4:PySide:PyQt5:PySide2'
+
 from Qt import __binding__
 
 
 def _pyqt4_():
-    import Qt as QtExt
-    from QtExt import QtWidgets
+    import Qt
+    from Qt import QtWidgets
 
     # Monkey Patch for forward compatibility
     def setSectionResizeMode(self, *args, **kwargs):
         return self.setResizeMode(*args, **kwargs)
 
     QtWidgets.QHeaderView.setSectionResizeMode = setSectionResizeMode
-    return QtExt
+    return Qt
 
 
 def _pyqt5_():
-    import Qt as QtExt
-    from QtExt import QtWidgets
+    import Qt
+    from Qt import QtWidgets
 
     # Monkey Patch for backward compatibility
     def setResizeMode(self, *args, **kwargs):
@@ -33,12 +39,12 @@ def _pyqt5_():
 
     QtWidgets.QApplication.translate = staticmethod(translate)
 
-    return QtExt
+    return Qt
 
 
 def _pyside_():
-    import Qt as QtExt
-    from QtExt import QtWidgets
+    import Qt
+    from Qt import QtWidgets
 
     # Monkey Patch for forward compatibility
     def setSectionResizeMode(self, *args, **kwargs):
@@ -46,12 +52,12 @@ def _pyside_():
 
     QtWidgets.QHeaderView.setSectionResizeMode = setSectionResizeMode
 
-    return QtExt
+    return Qt
 
 
 def _pyside2_():
-    import Qt as QtExt
-    from QtExt import QtWidgets
+    import Qt
+    from Qt import QtWidgets
 
     # Monkey Patch for backward compatibility
     def setResizeMode(self, *args, **kwargs):
@@ -69,16 +75,15 @@ def _pyside2_():
 
     QtWidgets.QApplication.translate = staticmethod(translate)
 
-    return QtExt
-
+    return Qt
 
 mapping = {
-    'pyqt4': _pyqt4_,
-    'pyqt5': _pyqt5_,
-    'pyside': _pyside_,
-    'pyside2': _pyside2_
+    'PyQt4': _pyqt4_,
+    'PySide': _pyqt5_,
+    'PyQt5': _pyside_,
+    'PySide2': _pyside2_
 }
 
 
-patch_it = mapping.get(__binding__)
-patch_it()
+patch_qt = mapping.get(__binding__)
+sys.modules[__name__] = patch_qt()
