@@ -20,7 +20,7 @@ def test_translate_and_UnicodeUTF8(PyQt4, python_version):
     assert isinstance(result, _str_)
 
 
-def test_qheaderview_pyqt4_forward_compatiblity(PyQt4):
+def test_qheaderview_forward_compatiblity(PyQt4):
     from QtExt import QtWidgets
     from QtExt import QtGui
     assert QtWidgets.QHeaderView.setSectionResizeMode
