@@ -1,3 +1,5 @@
+# :coding: utf-8
+# :copyright: Copyright (c) 2016 ftrack
 
 def test_translate_and_UnicodeUTF8(PyQt5, python_version):
     _str_ = str
