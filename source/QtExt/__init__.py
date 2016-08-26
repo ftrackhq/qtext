@@ -1,15 +1,14 @@
 import os
 import sys
-import warnings
 
+# Provide default resolution order for Qt
+_default_resolution_older_ = 'PyQt4:PySide:PyQt5:PySide2'
+os.environ['QT_PREFERRED_BINDING'] = _default_resolution_older_
 
-# provide default resolution order for Qt
-os.environ['QT_PREFERRED_BINDING'] = 'PyQt4:PySide:PyQt5:PySide2'
-
-from Qt import __binding__
 
 
 def _pyqt4_():
+
     import Qt
     from Qt import QtWidgets
 
@@ -22,6 +21,7 @@ def _pyqt4_():
 
 
 def _pyqt5_():
+
     import Qt
     from Qt import QtWidgets
 
@@ -45,6 +45,7 @@ def _pyqt5_():
 
 
 def _pyside_():
+
     import Qt
     from Qt import QtWidgets
 
@@ -58,6 +59,7 @@ def _pyside_():
 
 
 def _pyside2_():
+
     import Qt
     from Qt import QtWidgets
 
@@ -86,6 +88,6 @@ mapping = {
     'PySide2': _pyside2_
 }
 
-
+from Qt import __binding__
 patch_qt = mapping.get(__binding__)
 sys.modules[__name__] = patch_qt()

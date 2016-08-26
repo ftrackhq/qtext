@@ -27,8 +27,8 @@ setup(
     version='0.1.0',
     description='Qt framework extender',
     keywords='PyQt4, PyQt5, PySide, PySide2',
-    url='https://bitbucket.org/efestolab/QtExt',
-    author='efestolab',
+    url='https://bitbucket.org/ftrack/QtExt',
+    author='ftrack',
     packages=find_packages(PACKAGES_PATH),
     license='Apache License (2.0)',
     package_dir={
