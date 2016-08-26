@@ -26,7 +26,7 @@ class PyTest(TestCommand):
 
 # General configuration.
 setup(
-    name='QtExtender',
+    name='QtExt',
     version='0.1.0',
     description='Qt framework extender',
     keywords='PyQt4, PyQt5, PySide, PySide2',
