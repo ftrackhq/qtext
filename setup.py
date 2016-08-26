@@ -35,12 +35,12 @@ setup(
         '': 'source'
     },
     setup_requires=[
-        'Qt.py >= 0.3.1',
+        'Qt.py == 0.3.3',
         'sphinx >= 1.2.2, < 2',
         'sphinx_rtd_theme >= 0.1.6, < 2'
     ],
     install_requires=[
-        'Qt.py >= 0.3.1',
+        'Qt.py == 0.3.3',
     ],
     tests_require=['pytest >= 2.3.5, < 3'],
     cmdclass={'test': PyTest}
