@@ -12,36 +12,34 @@ os.environ['QT_PREFERRED_BINDING'] = _default_resolution_older_
 def _pyqt4_():
 
     import Qt
-    from Qt import QtWidgets
 
     # Monkey Patch for forward compatibility
     def setSectionResizeMode(self, *args, **kwargs):
         return self.setResizeMode(*args, **kwargs)
 
-    QtWidgets.QHeaderView.setSectionResizeMode = setSectionResizeMode
+    Qt.QtWidgets.QHeaderView.setSectionResizeMode = setSectionResizeMode
     return Qt
 
 
 def _pyqt5_():
 
     import Qt
-    from Qt import QtWidgets
 
     # Monkey Patch for backward compatibility
     def setResizeMode(self, *args, **kwargs):
         return self.setSectionResizeMode(*args, **kwargs)
 
-    QtWidgets.QHeaderView.setResizeMode = setResizeMode
+    Qt.QtWidgets.QHeaderView.setResizeMode = setResizeMode
 
     # provide mocked UnicodeUTF8 For backward compatibility
-    QtWidgets.QApplication.UnicodeUTF8 = -1
+    Qt.QtWidgets.QApplication.UnicodeUTF8 = -1
 
-    old_translate_fn = QtWidgets.QApplication.translate
+    old_translate_fn = Qt.QtWidgets.QApplication.translate
 
     def translate(context, key, disambiguation=None, encoding=None, n=0):
         return old_translate_fn(context, key, disambiguation, n)
 
-    QtWidgets.QApplication.translate = staticmethod(translate)
+    Qt.QtWidgets.QApplication.translate = staticmethod(translate)
 
     return Qt
 
@@ -49,13 +47,12 @@ def _pyqt5_():
 def _pyside_():
 
     import Qt
-    from Qt import QtWidgets
 
     # Monkey Patch for forward compatibility
     def setSectionResizeMode(self, *args, **kwargs):
         return self.setResizeMode(*args, **kwargs)
 
-    QtWidgets.QHeaderView.setSectionResizeMode = setSectionResizeMode
+    Qt.QtWidgets.QHeaderView.setSectionResizeMode = setSectionResizeMode
 
     return Qt
 
@@ -63,23 +60,22 @@ def _pyside_():
 def _pyside2_():
 
     import Qt
-    from Qt import QtWidgets
 
     # Monkey Patch for backward compatibility
     def setResizeMode(self, *args, **kwargs):
         return self.setSectionResizeMode(*args, **kwargs)
 
-    QtWidgets.QHeaderView.setResizeMode = setResizeMode
+    Qt.QtWidgets.QHeaderView.setResizeMode = setResizeMode
 
     # provide mocked UnicodeUTF8 For backward compatibility
-    QtWidgets.QApplication.UnicodeUTF8 = -1
+    Qt.QtWidgets.QApplication.UnicodeUTF8 = -1
 
-    old_translate_fn = QtWidgets.QApplication.translate
+    old_translate_fn = Qt.QtWidgets.QApplication.translate
 
     def translate(context, key, disambiguation=None, encoding=None, n=0):
         return old_translate_fn(context, key, disambiguation, n)
 
-    QtWidgets.QApplication.translate = staticmethod(translate)
+    Qt.QtWidgets.QApplication.translate = staticmethod(translate)
 
     return Qt
 
@@ -92,4 +88,4 @@ mapping = {
 
 from Qt import __binding__
 patch_qt = mapping.get(__binding__)
-sys.modules['QtExt'] = patch_qt()
+sys.modules[__name__] = patch_qt()
