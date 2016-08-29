@@ -5,9 +5,8 @@ import os
 import sys
 
 # Provide default resolution order for Qt
-_default_resolution_older_ = 'PyQt4:PySide:PyQt5:PySide2'
+_default_resolution_older_ = 'PySide:PySide2'
 os.environ['QT_PREFERRED_BINDING'] = _default_resolution_older_
-
 
 
 def _pyqt4_():
@@ -93,4 +92,4 @@ mapping = {
 
 from Qt import __binding__
 patch_qt = mapping.get(__binding__)
-sys.modules[__name__] = patch_qt()
+sys.modules['QtExt'] = patch_qt()
