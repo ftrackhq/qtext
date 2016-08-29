@@ -1,0 +1,18 @@
+FROM ubuntu:16.04
+
+RUN apt-get update && \
+    apt-get install -y \
+        software-properties-common && \
+    add-apt-repository -y ppa:thopiekar/pyside-git && \
+    apt-get update && apt-get install -y \
+        python \
+        python-dev \
+        python-pip \
+        python-qt4 \
+        python-pyqt5 \
+        python-pyside \
+        python-pyside2
+
+ADD . /sandbox
+WORKDIR /sandbox
+ENTRYPOINT python setup.py test
