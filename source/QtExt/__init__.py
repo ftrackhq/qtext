@@ -21,7 +21,7 @@ def _pyqt4_():
 
     Qt.QtWidgets.QHeaderView.setSectionResizeMode = setSectionResizeMode
 
-    # remap QtSortFilterProxyModel from PyQt4.QtGui To PyQt4.QtCore
+    # Remap QtSortFilterProxyModel from PyQt4.QtGui To PyQt4.QtCore.
     Qt.QtCore.QSortFilterProxyModel = Qt.QtGui.QSortFilterProxyModel
 
     return Qt
