@@ -1,13 +1,6 @@
 # :coding: utf-8
 # :copyright: Copyright (c) 2016 ftrack
-
-import os
 import sys
-
-# Provide default resolution order for Qt
-_default_resolution_older_ = os.pathsep.join(['PySide', 'PySide2'])
-os.environ['QT_PREFERRED_BINDING'] = _default_resolution_older_
-
 
 from Qt import __binding__
 
