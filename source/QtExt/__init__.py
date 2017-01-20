@@ -5,7 +5,7 @@ import os
 import sys
 
 # Provide default resolution order for Qt
-_default_resolution_older_ = os.pathsep.join(['PySide2', 'PySide'])
+_default_resolution_older_ = os.pathsep.join(['PySide', 'PySide2'])
 os.environ.setdefault('QT_PREFERRED_BINDING', _default_resolution_older_)
 
 
