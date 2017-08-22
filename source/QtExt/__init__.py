@@ -67,8 +67,9 @@ class QtWebMeta(type(Qt.QtCore.QObject)):
         framework = get_framework()
 
         if not framework:
-            # No QtWebKit/QtWebKitWidgets/QtWebEngineWidgets found....
-            return
+            raise QtExtError(
+                'No QtWebKit / QtWebKitWidgets / QtWebEngineWidgets found'
+            )
 
         module = framework.get(name.lower())
         meta_bases = (module, bases[0])
@@ -95,7 +96,7 @@ class WebPage(Qt.QtCore.QObject):
                 proxy
             )
 
-        raise NotImplementedError(
+        raise QtExtError(
             'Sorry, WebPage.setProxy is not available.'
         )
 
