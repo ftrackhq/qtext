@@ -12,6 +12,23 @@ from Qt import __binding__
 import Qt
 
 
+def is_webwidget_supported():
+    ''' Return True if either QtWebEngine or QtWebKit is available.'''
+    try:
+        from Qt import QtWebEngineWidgets
+        return True
+    except ImportError:
+        pass
+
+    try:
+        from Qt import QtWebKitWidgets
+        return True
+    except ImportError:
+        pass
+
+    return False
+
+
 class QtExtError(Exception):
     '''Custom QtExt Exception'''
 
