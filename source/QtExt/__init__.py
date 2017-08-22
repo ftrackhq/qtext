@@ -12,6 +12,11 @@ from Qt import __binding__
 import Qt
 
 
+class QtWebCompat(Qt.QtCore.QObject):
+    def __init__(self, *args, **kwargs):
+        super(QtWebCompat, self).__init__(*args, **kwargs)
+
+
 class QtWebMeta(type(Qt.QtCore.QObject)):
 
     def __new__(cls, name, bases, attrs):
@@ -57,8 +62,6 @@ class QtWebMeta(type(Qt.QtCore.QObject)):
         framework = get_framework()
         module = framework.get(name.lower())
         meta_bases = (module, bases[0])
-
-        print meta_bases
 
         instance = super(QtWebMeta, cls).__new__(
             cls, name, meta_bases, attrs
@@ -108,9 +111,10 @@ def _pyqt4_():
     # Remap QtSortFilterProxyModel from PyQt4.QtGui To PyQt4.QtCore.
     Qt.QtCore.QSortFilterProxyModel = Qt.QtGui.QSortFilterProxyModel
 
-    # Provide a generic QtWebKitWidgets entry
-    Qt.QtWebKitWidgets.QtWebView = WebView
-    Qt.QtWebKitWidgets.QtWebPage = WebPage
+    # Provide a generic QtWebCompat entry for compatibilty purposes
+    setattr(Qt, QtWebCompat.__name__, QtWebCompat)
+    Qt.QtWebCompat.QtWebView = WebView
+    Qt.QtWebCompat.QtWebPage = WebPage
 
     return Qt
 
@@ -134,9 +138,10 @@ def _pyqt5_():
 
     Qt.QtWidgets.QApplication.translate = staticmethod(translate)
 
-    # Provide a generic QtWebKitWidgets entry
-    Qt.QtWebKitWidgets.QtWebView = WebView
-    Qt.QtWebKitWidgets.QtWebPage = WebPage
+    # Provide a generic QtWebCompat entry for compatibilty purposes
+    setattr(Qt, QtWebCompat.__name__, QtWebCompat)
+    Qt.QtWebCompat.QtWebView = WebView
+    Qt.QtWebCompat.QtWebPage = WebPage
 
     return Qt
 
@@ -150,9 +155,10 @@ def _pyside_():
 
     Qt.QtWidgets.QHeaderView.setSectionResizeMode = setSectionResizeMode
 
-    # Provide a generic QtWebKitWidgets entry
-    Qt.QtWebKitWidgets.QtWebView = WebView
-    Qt.QtWebKitWidgets.QtWebPage = WebPage
+    # Provide a generic QtWebCompat entry for compatibilty purposes
+    setattr(Qt, QtWebCompat.__name__, QtWebCompat)
+    Qt.QtWebCompat.QtWebView = WebView
+    Qt.QtWebCompat.QtWebPage = WebPage
 
     return Qt
 
@@ -176,9 +182,10 @@ def _pyside2_():
 
     Qt.QtWidgets.QApplication.translate = staticmethod(translate)
 
-    # Provide a generic QtWebKitWidgets entry
-    Qt.QtWebKitWidgets.QtWebView = WebView
-    Qt.QtWebKitWidgets.QtWebPage = WebPage
+    # Provide a generic QtWebCompat entry for compatibilty purposes
+    setattr(Qt, QtWebCompat.__name__, QtWebCompat)
+    Qt.QtWebCompat.QtWebView = WebView
+    Qt.QtWebCompat.QtWebPage = WebPage
 
     return Qt
 
