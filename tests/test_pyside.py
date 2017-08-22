@@ -32,8 +32,8 @@ def test_qheaderview_forward_compatiblity(PySide):
 
 def test_QtWebCompat_methods(PySide):
     from QtExt import QtWebCompat
-    web = QtWebCompat.WebPage()
+    web = QtWebCompat.QtWebPage
     assert getattr(web, 'setProxy')
 
-    view = QtWebCompat.WebView()
+    view = QtWebCompat.QtWebView
     assert getattr(view, 'evaluateJavaScript')
