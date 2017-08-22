@@ -83,6 +83,10 @@ class WebPage(Qt.QtCore.QObject):
                 proxy
             )
 
+        raise NotImplementedError(
+            'WebPage.setProxy not available for {0} '.format(Qt.__name__)
+        )
+
 
 class WebView(Qt.QtCore.QObject):
     __metaclass__ = QtWebMeta
