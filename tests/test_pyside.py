@@ -30,10 +30,10 @@ def test_qheaderview_forward_compatiblity(PySide):
     assert QtGui.QHeaderView.setResizeMode
 
 
-def test_QtWebKitWidgets_methods(PySide):
-    from QtExt import QtWebKitWidgets
-    web = QtWebKitWidgets.WebPage()
+def test_QtWebCompat_methods(PySide):
+    from QtExt import QtWebCompat
+    web = QtWebCompat.WebPage()
     assert getattr(web, 'setProxy')
 
-    view = QtWebKitWidgets.WebView()
+    view = QtWebCompat.WebView()
     assert getattr(view, 'evaluateJavaScript')
