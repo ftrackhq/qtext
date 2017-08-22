@@ -8,8 +8,92 @@ import sys
 _default_resolution_older_ = os.pathsep.join(['PySide', 'PySide2'])
 os.environ.setdefault('QT_PREFERRED_BINDING', _default_resolution_older_)
 
-
 from Qt import __binding__
+import Qt
+
+
+class QtWebMeta(type(Qt.QtCore.QObject)):
+
+    def __new__(cls, name, bases, attrs):
+
+        def get_framework():
+            '''Check for available frameworks'''
+            try:
+                # QtWebEngineWidgets -- qt >= 5.6 webengine
+                from Qt import QtWebEngineWidgets
+
+                return {
+                    'webkit': False,
+                    'webpage': QtWebEngineWidgets.QWebEnginePage,
+                    'webview': QtWebEngineWidgets.QWebEngineView
+                }
+
+            except ImportError:
+                pass
+
+            try:
+                # QtWebKitWidgets -- qt < 5.6 webkit
+                from Qt import QtWebKitWidgets
+
+                return {
+                    'webkit': True,
+                    'webpage': QtWebKitWidgets.QWebPage,
+                    'webview': QtWebKitWidgets.QWebView
+                }
+            except ImportError:
+                pass
+
+            try:
+                # QtWebKit -- qt4 webkit
+                from Qt import QtWebKit
+                return {
+                    'webkit': True,
+                    'webpage': QtWebKit.QWebPage,
+                    'webview': QtWebKit.QWebView
+                }
+            except ImportError:
+                pass
+
+        framework = get_framework()
+        module = framework.get(name.lower())
+        meta_bases = (module, bases[0])
+
+        print meta_bases
+
+        instance = super(QtWebMeta, cls).__new__(
+            cls, name, meta_bases, attrs
+        )
+
+        setattr(
+            instance, 'webkit', framework.get('webkit')
+        )
+
+        return instance
+
+
+class WebPage(Qt.QtCore.QObject):
+    __metaclass__ = QtWebMeta
+
+    def setProxy(self, proxy):
+        if self.webkit:
+            self.networkAccessManager().setProxy(
+                proxy
+            )
+
+
+class WebView(Qt.QtCore.QObject):
+    __metaclass__ = QtWebMeta
+
+    def evaluateJavaScript(self, javascript):
+        if self.webkit:
+            self.page().mainFrame().evaluateJavaScript(
+                javascript
+            )
+
+        else:
+            self.page().evaluateJavaScript(
+                javascript
+            )
 
 
 def _pyqt4_():
@@ -23,6 +107,10 @@ def _pyqt4_():
 
     # Remap QtSortFilterProxyModel from PyQt4.QtGui To PyQt4.QtCore.
     Qt.QtCore.QSortFilterProxyModel = Qt.QtGui.QSortFilterProxyModel
+
+    # Provide a generic QtWebKitWidgets entry
+    Qt.QtWebKitWidgets.QtWebView = WebView
+    Qt.QtWebKitWidgets.QtWebPage = WebPage
 
     return Qt
 
@@ -46,6 +134,10 @@ def _pyqt5_():
 
     Qt.QtWidgets.QApplication.translate = staticmethod(translate)
 
+    # Provide a generic QtWebKitWidgets entry
+    Qt.QtWebKitWidgets.QtWebView = WebView
+    Qt.QtWebKitWidgets.QtWebPage = WebPage
+
     return Qt
 
 
@@ -57,6 +149,10 @@ def _pyside_():
         return self.setResizeMode(*args, **kwargs)
 
     Qt.QtWidgets.QHeaderView.setSectionResizeMode = setSectionResizeMode
+
+    # Provide a generic QtWebKitWidgets entry
+    Qt.QtWebKitWidgets.QtWebView = WebView
+    Qt.QtWebKitWidgets.QtWebPage = WebPage
 
     return Qt
 
@@ -80,7 +176,12 @@ def _pyside2_():
 
     Qt.QtWidgets.QApplication.translate = staticmethod(translate)
 
+    # Provide a generic QtWebKitWidgets entry
+    Qt.QtWebKitWidgets.QtWebView = WebView
+    Qt.QtWebKitWidgets.QtWebPage = WebPage
+
     return Qt
+
 
 mapping = {
     'PyQt4': _pyqt4_,
