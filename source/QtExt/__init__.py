@@ -13,16 +13,17 @@ import Qt
 
 
 class QtWebCompat(Qt.QtCore.QObject):
-    def __init__(self, *args, **kwargs):
-        super(QtWebCompat, self).__init__(*args, **kwargs)
+    '''Compatibility class for QtWeb Components'''
 
 
 class QtWebMeta(type(Qt.QtCore.QObject)):
+    '''Base Metaclas for for QtWeb Components'''
 
     def __new__(cls, name, bases, attrs):
 
         def get_framework():
             '''Check for available frameworks'''
+
             try:
                 # QtWebEngineWidgets -- qt >= 5.6 webengine
                 from Qt import QtWebEngineWidgets
@@ -75,6 +76,8 @@ class QtWebMeta(type(Qt.QtCore.QObject)):
 
 
 class WebPage(Qt.QtCore.QObject):
+    '''Provide compatiblity access to WebPage setProxy method'''
+
     __metaclass__ = QtWebMeta
 
     def setProxy(self, proxy):
@@ -89,6 +92,8 @@ class WebPage(Qt.QtCore.QObject):
 
 
 class WebView(Qt.QtCore.QObject):
+    '''Provide compatiblity access to evaluateJavaScript method'''
+
     __metaclass__ = QtWebMeta
 
     def evaluateJavaScript(self, javascript):
