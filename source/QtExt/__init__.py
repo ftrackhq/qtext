@@ -3,6 +3,11 @@
 
 import os
 import sys
+import logging
+
+# setup logging
+logging.basicConfig()
+logger = logging.getLogger(__name__)
 
 # Provide default resolution order for Qt
 _default_resolution_older_ = os.pathsep.join(['PySide', 'PySide2'])
@@ -84,7 +89,7 @@ class QtWebMeta(type(Qt.QtCore.QObject)):
         framework = get_framework()
 
         if not framework:
-            raise QtExtError(
+            logger.warning(
                 'No QtWebKit / QtWebKitWidgets / QtWebEngineWidgets found'
             )
 
