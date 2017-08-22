@@ -12,8 +12,12 @@ from Qt import __binding__
 import Qt
 
 
+class QtExtError(Exception):
+    '''Custom QtExt Exception'''
+
+
 class QtWebCompat(Qt.QtCore.QObject):
-    '''Compatibility class for QtWeb Components'''
+    '''Compatibility class container for QtWeb Components'''
 
 
 class QtWebMeta(type(Qt.QtCore.QObject)):
@@ -61,6 +65,11 @@ class QtWebMeta(type(Qt.QtCore.QObject)):
                 pass
 
         framework = get_framework()
+
+        if not framework:
+            # No QtWebKit/QtWebKitWidgets/QtWebEngineWidgets found....
+            return
+
         module = framework.get(name.lower())
         meta_bases = (module, bases[0])
 
@@ -87,7 +96,7 @@ class WebPage(Qt.QtCore.QObject):
             )
 
         raise NotImplementedError(
-            'WebPage.setProxy not available for {0} '.format(Qt.__name__)
+            'Sorry, WebPage.setProxy is not available.'
         )
 
 
