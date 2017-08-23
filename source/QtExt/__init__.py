@@ -154,8 +154,8 @@ def _pyqt4_():
 
     # Provide a generic QtWebCompat entry for compatibilty purposes
     setattr(Qt, QtWebCompat.__name__, QtWebCompat)
-    Qt.QtWebCompat.QtWebView = WebView
-    Qt.QtWebCompat.QtWebPage = WebPage
+    Qt.QtWebCompat.QWebView = WebView
+    Qt.QtWebCompat.QWebPage = WebPage
 
     # Add new method to check compatiblity
     Qt.is_webwidget_supported = is_webwidget_supported
@@ -184,8 +184,8 @@ def _pyqt5_():
 
     # Provide a generic QtWebCompat entry for compatibilty purposes
     setattr(Qt, QtWebCompat.__name__, QtWebCompat)
-    Qt.QtWebCompat.QtWebView = WebView
-    Qt.QtWebCompat.QtWebPage = WebPage
+    Qt.QtWebCompat.QWebView = WebView
+    Qt.QtWebCompat.QWebPage = WebPage
 
     # Add new method to check compatiblity
     Qt.is_webwidget_supported = is_webwidget_supported
@@ -204,8 +204,8 @@ def _pyside_():
 
     # Provide a generic QtWebCompat entry for compatibilty purposes
     setattr(Qt, QtWebCompat.__name__, QtWebCompat)
-    Qt.QtWebCompat.QtWebView = WebView
-    Qt.QtWebCompat.QtWebPage = WebPage
+    Qt.QtWebCompat.QWebView = WebView
+    Qt.QtWebCompat.QWebPage = WebPage
 
     # Add new method to check compatiblity
     Qt.is_webwidget_supported = is_webwidget_supported
@@ -234,8 +234,8 @@ def _pyside2_():
 
     # Provide a generic QtWebCompat entry for compatibilty purposes
     setattr(Qt, QtWebCompat.__name__, QtWebCompat)
-    Qt.QtWebCompat.QtWebView = WebView
-    Qt.QtWebCompat.QtWebPage = WebPage
+    Qt.QtWebCompat.QWebView = WebView
+    Qt.QtWebCompat.QWebPage = WebPage
 
     # Add new method to check compatiblity
     Qt.is_webwidget_supported = is_webwidget_supported
