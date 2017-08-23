@@ -6,7 +6,6 @@ import sys
 import logging
 
 # setup logging
-logging.basicConfig()
 logger = logging.getLogger(__name__)
 
 # Provide default resolution order for Qt
