@@ -17,7 +17,7 @@ import Qt
 
 
 def is_webwidget_supported():
-    ''' Return True if either QtWebEngine or QtWebKit is available.'''
+    ''' Return True if either QtWebEngineWidgets or QtWebKitWidgets is available.'''
     try:
         from Qt import QtWebEngineWidgets
         return True
