@@ -31,11 +31,14 @@ def test_qheaderview_forward_compatiblity(PyQt4):
     assert QtGui.QHeaderView.setResizeMode
 
 
-def test_QtWebCompat_methods(PyQt4):
+def test_QtWebCompat_QtWebPage_setProxy_methods(PyQt4):
     from QtExt import QtWebCompat
     web = QtWebCompat.QtWebPage
     assert hasattr(web, 'setProxy')
 
+
+def test_QtWebCompat_QtWebView_evaluateJavaScript_methods(PyQt4):
+    from QtExt import QtWebCompat
     view = QtWebCompat.QtWebView
     assert hasattr(view, 'evaluateJavaScript')
 
