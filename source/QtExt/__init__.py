@@ -92,6 +92,7 @@ class QtWebMeta(type(Qt.QtCore.QObject)):
             logger.warning(
                 'No QtWebKit / QtWebKitWidgets / QtWebEngineWidgets found'
             )
+            return
 
         module = framework.get(name.lower())
         meta_bases = (module, bases[0])
