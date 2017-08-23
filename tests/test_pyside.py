@@ -37,3 +37,7 @@ def test_QtWebCompat_methods(PySide):
 
     view = QtWebCompat.QtWebView
     assert hasattr(view, 'evaluateJavaScript')
+
+
+def test_is_webwidget_supported(PySide):
+    from QtExt import is_webwidget_supported

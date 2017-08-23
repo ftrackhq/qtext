@@ -158,6 +158,9 @@ def _pyqt4_():
     Qt.QtWebCompat.QtWebView = WebView
     Qt.QtWebCompat.QtWebPage = WebPage
 
+    # Add new method to check compatiblity
+    Qt.is_webwidget_supported = is_webwidget_supported
+
     return Qt
 
 
@@ -185,6 +188,9 @@ def _pyqt5_():
     Qt.QtWebCompat.QtWebView = WebView
     Qt.QtWebCompat.QtWebPage = WebPage
 
+    # Add new method to check compatiblity
+    Qt.is_webwidget_supported = is_webwidget_supported
+
     return Qt
 
 
@@ -201,6 +207,9 @@ def _pyside_():
     setattr(Qt, QtWebCompat.__name__, QtWebCompat)
     Qt.QtWebCompat.QtWebView = WebView
     Qt.QtWebCompat.QtWebPage = WebPage
+
+    # Add new method to check compatiblity
+    Qt.is_webwidget_supported = is_webwidget_supported
 
     return Qt
 
@@ -228,6 +237,9 @@ def _pyside2_():
     setattr(Qt, QtWebCompat.__name__, QtWebCompat)
     Qt.QtWebCompat.QtWebView = WebView
     Qt.QtWebCompat.QtWebPage = WebPage
+
+    # Add new method to check compatiblity
+    Qt.is_webwidget_supported = is_webwidget_supported
 
     return Qt
 
