@@ -5,8 +5,16 @@ import os
 import sys
 import logging
 
+
+try:  # Python 2.7+
+    from logging import NullHandler
+except ImportError:
+    class NullHandler(logging.Handler):
+        def emit(self, record):
+            pass
+
 # setup logging
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__).addHandler(NullHandler())
 
 # Provide default resolution order for Qt
 _default_resolution_older_ = os.pathsep.join(['PySide', 'PySide2'])
