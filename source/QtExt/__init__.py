@@ -7,14 +7,15 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-try:  # Python 2.7+
+try:
+    # Python 2.7+
     from logging import NullHandler
 except ImportError:
     class NullHandler(logging.Handler):
         def emit(self, record):
             pass
 
-# setup logging
+# Setup logging.
 logger.addHandler(NullHandler())
 
 # Provide default resolution order for Qt
@@ -26,7 +27,7 @@ import Qt
 
 
 def is_webwidget_supported():
-    ''' Return True if either QtWebEngineWidgets or QtWebKitWidgets is available.'''
+    '''Return True if either QtWebEngineWidgets or QtWebKitWidgets is available.'''
     try:
         from Qt import QtWebEngineWidgets
         return True
