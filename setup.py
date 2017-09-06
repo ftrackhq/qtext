@@ -27,7 +27,7 @@ class PyTest(TestCommand):
 # General configuration.
 setup(
     name='QtExt',
-    version='0.1.0',
+    version='0.2.0',
     description='Qt framework extender',
     keywords='PyQt4, PyQt5, PySide, PySide2',
     url='https://bitbucket.org/ftrack/QtExt',
@@ -40,7 +40,8 @@ setup(
     setup_requires=[
         'Qt.py == 0.3.4',
         'sphinx >= 1.2.2, < 2',
-        'sphinx_rtd_theme >= 0.1.6, < 2'
+        'sphinx_rtd_theme >= 0.1.6, < 2',
+        'lowdown >= 0.1.0, < 1'
     ],
     install_requires=[
         'Qt.py == 0.3.4',
