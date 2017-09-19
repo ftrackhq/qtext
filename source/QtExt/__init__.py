@@ -60,6 +60,18 @@ class QtWebMeta(type(Qt.QtCore.QObject)):
             '''Check for available frameworks'''
 
             try:
+                # QtWebKitWidgets -- qt < 5.6 webkit
+                from Qt import QtWebKitWidgets
+
+                return {
+                    'webkit': True,
+                    'webpage': QtWebKitWidgets.QWebPage,
+                    'webview': QtWebKitWidgets.QWebView
+                }
+            except ImportError:
+                pass
+
+            try:
                 # QtWebEngineWidgets -- qt >= 5.6 webengine
                 from Qt import QtWebEngineWidgets
 
@@ -69,18 +81,6 @@ class QtWebMeta(type(Qt.QtCore.QObject)):
                     'webview': QtWebEngineWidgets.QWebEngineView
                 }
 
-            except ImportError:
-                pass
-
-            try:
-                # QtWebKitWidgets -- qt < 5.6 webkit
-                from Qt import QtWebKitWidgets
-
-                return {
-                    'webkit': True,
-                    'webpage': QtWebKitWidgets.QWebPage,
-                    'webview': QtWebKitWidgets.QWebView
-                }
             except ImportError:
                 pass
 
