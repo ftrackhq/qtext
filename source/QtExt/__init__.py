@@ -22,6 +22,17 @@ logger.addHandler(NullHandler())
 _default_resolution_older_ = os.pathsep.join(['PySide', 'PySide2'])
 os.environ.setdefault('QT_PREFERRED_BINDING', _default_resolution_older_)
 
+# Qt.py 0.3.4 remaps QStringListModel to allign the PySdie2 Python binding with
+# with the C++ libs. Eventually PySide2 was fixed in 5.9+, and only the most
+# recent Qt.py, 1.2.0b3, reflects that.
+try:
+    from PySide2 import QtGui, QtCore
+except ImportError:
+    pass
+else:
+    if not hasattr(QtGui, 'QStringListModel'):
+        setattr(QtGui, 'QStringListModel', QtCore.QStringListModel)
+
 from Qt import __binding__
 import Qt
 
